@@ -1,0 +1,25 @@
+{
+  "name": "appointment-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "concurrently \"nodemon server\" \"cd client && npm run serve\"",
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "cd client && npm run serve"
+  },
+  "keywords": [],
+  "author": "Jatin Bumbra",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "firebase": "^7.21.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4"
+  }
+}
