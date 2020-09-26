@@ -8,8 +8,7 @@
     "start": "node server",
     "server": "nodemon server",
     "client": "cd client && npm run serve",
-    "postinstall": "npm install --prefix client",
-    "build": "npm run build --prefix client"
+    "postinstall": "npm install --prefix client"
   },
   "keywords": [],
   "author": "Jatin Bumbra",
