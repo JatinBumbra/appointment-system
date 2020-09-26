@@ -109,20 +109,17 @@ export default {
     async setSlots() {
       this.setLoading();
       try {
-        const res = await fetch(
-          "https://appoint-app-jatin.herokuapp.com/settimezone",
-          {
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            method: "POST",
-            body: JSON.stringify({
-              selected_date: this.selected_date,
-              selected_timezone: this.selected_timezone,
-            }),
-          }
-        );
+        const res = await fetch("/settimezone", {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify({
+            selected_date: this.selected_date,
+            selected_timezone: this.selected_timezone,
+          }),
+        });
         const data = await res.json();
         // Check for server error
         if (res.status == 500) this.setAlert(data.msg, "error");
