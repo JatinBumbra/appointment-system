@@ -8,10 +8,10 @@ receives the available slots(in 30 mins each) for that particular date.
 - Firebase Firestore as Database
 
 ## Other libraries used
-- moment.js : For date formatting
-- Vuetify   : For styling
+- **moment.js** : For date formatting
+- **Vuetify**   : For styling
 
 ## Scripts
-- start : Runs the backend server, for use as a stand-alone API
-- client : Runs the Vue.js frontend (Without backend)
-- dev : Runs both the backend and the frontend
+- **start** : Runs the backend server, for use as a stand-alone API
+- **client** : Runs the Vue.js frontend (Without backend)
+- **dev** : Runs both the backend and the frontend
