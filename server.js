@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-const serveStatic = require('serve-static');
 const path = require('path');
 // Init app
 const app = express();
