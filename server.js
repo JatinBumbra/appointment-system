@@ -7,7 +7,7 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 // Set static folder and serve index.html
 app.use(express.static('client/dist'));
 app.get('*', (req, res) =>
