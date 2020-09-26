@@ -4,7 +4,7 @@
       <thead class="blue darken-2">
         <tr>
           <th class="text-center subtitle-1 blue--text text--lighten-5">
-            Available Slots
+            Available Slots (30 mins)
           </th>
         </tr>
       </thead>
@@ -17,8 +17,14 @@
             height="6"
           ></v-progress-linear>
         </tr>
-        <tr v-if="!slots.length">
+        <tr v-if="!date">
           <td>Please select a date.</td>
+        </tr>
+        <tr v-if="date && !timezone">
+          <td>Please select a timezone.</td>
+        </tr>
+        <tr v-if="date && timezone && !slots.length">
+          <td>Click Search to fetch all Available Slots.</td>
         </tr>
         <tr v-for="slot in slots" :key="slot">
           <td @click="setTime" class="text-center">{{ slot }}</td>
@@ -30,9 +36,11 @@
 
 <script>
 export default {
-  name: "Slots",
+  name: 'Slots',
   props: {
     loading: Boolean,
+    date: String,
+    timezone: String,
     slots: Array,
     setTime: Function,
   },

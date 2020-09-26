@@ -4,8 +4,7 @@ const slots = require('../slots');
 const moment = require('moment-timezone');
 
 module.exports = (timezone, date, slots) => {
-  const data = slots.map(slot =>
+  return slots.map(slot =>
     moment(`${date}T${slot}`).tz(timezone).format('ddd DD MMM, hh:mm A')
   );
-  return { data };
 };

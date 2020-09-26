@@ -79,9 +79,7 @@ router.post('/settimezone', async (req, res) => {
       return res.json({ data: all_slots });
     }
     // Else, generate free slots by filtering the events from total slots
-    const free_slots = all_slots.data.filter(
-      slot => !data.events.includes(slot)
-    );
+    const free_slots = all_slots.filter(slot => !data.events.includes(slot));
     res.json({ data: free_slots });
   } catch (error) {
     console.log(error);
