@@ -18,7 +18,7 @@
         label="Select Timezone"
       ></v-select>
     </div>
-    <div>
+    <div class="d-flex justify-space-between">
       <v-btn
         class="darken-2 subtitle-1 blue--text text--lighten-5"
         color="blue"
@@ -27,6 +27,14 @@
         :loading="loading"
         @click="setSlots"
         >Search
+      </v-btn>
+      <v-btn
+        class="darken-2 subtitle-1 blue--text text--lighten-5"
+        color="blue"
+        :ripple="true"
+        @click="setModal"
+      >
+        View Events
       </v-btn>
     </div>
   </div>
@@ -52,6 +60,7 @@ export default {
     setSlots: Function,
     setDate: Function,
     setTimezone: Function,
+    setModal: Function,
   },
 };
 </script>
