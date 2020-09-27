@@ -51,12 +51,12 @@
 </template>
 
 <script>
-import DatePicker from "./components/DatePicker";
-import Slots from "./components/Slots";
-import Display from "./components/Display";
+import DatePicker from './components/DatePicker';
+import Slots from './components/Slots';
+import Display from './components/Display';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     DatePicker,
     Slots,
@@ -109,12 +109,12 @@ export default {
     async setSlots() {
       this.setLoading();
       try {
-        const res = await fetch("/settimezone", {
+        const res = await fetch('/settimezone', {
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
-          method: "POST",
+          method: 'POST',
           body: JSON.stringify({
             selected_date: this.selected_date,
             selected_timezone: this.selected_timezone,
@@ -122,10 +122,10 @@ export default {
         });
         const data = await res.json();
         // Check for server error
-        if (res.status == 500) this.setAlert(data.msg, "error");
+        if (res.status == 500) this.setAlert(data.msg, 'error');
         else this.slots = [...data.data];
       } catch (error) {
-        this.setAlert("Unable to connect", "error");
+        this.setAlert('Unable to connect', 'error');
         console.log(error);
         this.clearFields();
       }
@@ -135,12 +135,12 @@ export default {
     async bookSlot() {
       this.setLoading();
       try {
-        const res = await fetch("http://localhost:5000/createevent", {
+        const res = await fetch('/createevent', {
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
-          method: "POST",
+          method: 'POST',
           body: JSON.stringify({
             selected_date: this.selected_date,
             selected_time: this.selected_time,
@@ -148,10 +148,10 @@ export default {
         });
         const data = await res.json();
         // Check for server error
-        if (res.status == 500) this.setAlert(data.msg, "error");
-        else this.setAlert(data.msg, "success");
+        if (res.status == 500) this.setAlert(data.msg, 'error');
+        else this.setAlert(data.msg, 'success');
       } catch (error) {
-        this.setAlert("Unable to connect", "error");
+        this.setAlert('Unable to connect', 'error');
       }
       this.clearFields();
       this.setLoading();
