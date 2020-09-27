@@ -1,7 +1,9 @@
+const firebase = require('firebase');
 const router = require('express').Router();
 const db = require('../config/firebase');
 const slots = require('../slots');
 const convert_time = require('../utilities/timezone');
+const diffDates = require('../utilities/diffDates');
 
 // @route   POST /createevent
 // @desc    Book a slot
@@ -61,7 +63,7 @@ router.post('/freeslots', async (req, res) => {
   }
 });
 
-// @route     POST /freeslots
+// @route     POST /settimezone
 // @desc      Return free slots
 router.post('/settimezone', async (req, res) => {
   const timezone = req.body.selected_timezone;
@@ -81,6 +83,35 @@ router.post('/settimezone', async (req, res) => {
     // Else, generate free slots by filtering the events from total slots
     const free_slots = all_slots.filter(slot => !data.events.includes(slot));
     res.json({ data: free_slots });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+// @route     POST /getevents
+// @desc      Retrieve events between two dates
+router.post('/getevents', async (req, res) => {
+  const start_month = req.body.start_date.slice(6, 8);
+  const end_month = req.body.end_date.slice(6, 8);
+  // Same month validation
+  if (start_month !== end_month) {
+    return res
+      .status(400)
+      .json({ msg: 'Operation available only for dates within same month' });
+  }
+  try {
+    const dates = diffDates(req.body.start_date, req.body.end_date);
+    // Retrieve docs
+    const data = await db
+      .collection('events')
+      .where(firebase.firestore.FieldPath.documentId(), 'in', dates)
+      .get();
+    const events = data.docs.map((doc) => ({
+      date: doc.id,
+      events: doc.data(),
+    }));
+    res.json({ data: events });
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: 'Server error' });
